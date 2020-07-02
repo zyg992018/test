@@ -1,0 +1,341 @@
+
+江苏科技大学
+ 
+ 
+数据库原理与应用
+课程设计报告
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+学    院             经济管理学院                  
+专    业          信息管理与信息系统               
+学生姓名                龙甫怡                     
+班级学号              1440407107                   
+
+二零二零年五月
+ 
+ 
+	目  录
+
+1 系统需求分析	1
+1.1	系统具体需求	1
+1.2 系统业务流程分析	1
+1.3.1 采购任务分配	1
+1.3.2 采购询价	1
+1.3 系统数据流图	1
+1.3.1 顶层数据流图	1
+1.3.2 零层数据流图	1
+2 数据库设计	2
+2.1 概念结构设计（ER图）	2
+2.2 逻辑结构设计	2
+2.2.1 表清单	2
+2.2.2 表设计	2
+3 数据库应用系统开发	3
+3.1 表创建（表关系图）	3
+3.2 索引创建（可以截图）	3
+3.3 视图创建	3
+3.4 触发器创建	3
+4 功能模块设计	4
+5 功能模块实现	5
+5.1 采购任务分配	5
+5.1.1 下达任务	5
+ 
+1	系统需求分析
+1.1	系统具体需求
+1)	采购室主任接收采购任务，根据采购任务清单进行采购任务分配，同时根据具体情况调整对已下达的任务进行撤销。
+2)	采购员先获得要询价的供应商，对自己分配的任务向供应商获得询价信息，并将询价信息录入到系统中。
+3)	采购室主任根据询价单对询价单进行审价,同时也可以撤销审价。
+4)	采购员与供应商签订合同并将合同信息录入到系统中。
+5)	物资部经理对录入的合同进行审核，信息不一致或者有误要进行重新录入合同。
+6)	采购员录入发票信息，并且在录完发票信息后进行审核信息是否正确，然后存储到系统中。
+1.2	系统业务流程分析
+1.2.1	采购任务分配
+1.2.2	采购询价
+1.2.3	采购审价
+1.2.4	采购合同管理
+1.2.5	采购发票录入
+1.3	系统数据流图
+1.3.1	顶层数据流图
+ 
+1.3.2	零层数据流图
+ 
+1.3.3	一层数据流图
+ 
+2	数据库设计
+2.1	概念结构设计（ER图）
+ 
+在上述图中，部分对应关系解释如下：
+（1）管理员与表中其他属性为一对多的关系，一位管理员管理多件商品、多位用户、多份订单、多份问卷、多张优惠券，同时这些属性被一位管理员管理着。
+（2）******。
+
+2.1	逻辑结构设计
+2.2.1	表清单
+实体名称	中文注释
+Department	部门表
+Employee	员工表
+Supplier	供应商表表
+PurchaseTask	采购任务清单
+SupplierMaterial	供应商物资关系表
+Contracts	合同信息表
+ContractDetails	合同明细表
+Material	物资信息表
+Inquiry	询价清单
+InquiryDetails	询价明细表
+2.2.2	表设计
+1)	Department-部门表
+字段名	数据类型	长度	允许空	主键	说明
+D_id	char	5	no	yes	部门编号
+D_name	varchar	20	no	no	部门名称
+D_address	varchar	30	no	no	部门地址
+Manager	varchar	20	no	no	负责人姓名
+Manager_phone	char	11	no	no	负责人手机号
+2)	Employee-员工表
+字段名	数据类型	长度	允许空	主键	说明
+E_id	char	10	no	yes	编号（部门编号+5员工号）
+E_name	varchar	20	no	no	部门名称
+D_id	char	5	yes	no	部门编号（外键）
+Gender	char	1	yes	no	性别0男1女
+E_phone	char	11	no	no	手机号（数字字符串）
+Position	varchar	10	yes	no	职位名称
+Age	int	4	yes	no	年龄
+UserName	varchar	10	no	no	系统登录用户名
+Password	varchar	10	no	no	密码
+E_address	varchar	30	yes	no	住址
+HouseholdRegister	varchar	20	yes	no	户籍
+Photo	image	2147483647	yes	no	照片
+DateOfBirth	date	3	yes	no	出生日期
+3)	Supplier-供应商表
+字段名	数据类型	长度	允许空	主键	说明
+S_id	char	5	no	yes	供应商编号
+S_name	varchar	20	no	no	供应商名称
+S_address	varchar	30	no	no	供应商地址
+Describe	varchar	40	yes	no	备注
+TelephoneNumber	char	11	no	no	联系电话
+Introduction	varchar	50	yes	no	供应商简介
+CooperationNum	int	4	no	no	合作次数（default 0）
+4)	PurchaseTask-任务清单
+字段名	数据类型	长度	允许空	主键	说明
+P_id	char	10	no	yes	任务编号（项目号+5任务号）
+M_id	char	10	no	yes	物资编号（外键）
+B_E_id	char	10	yes	no	采购员编号（外键）
+Num	DECIMAL(10,2)	9	no	no	采购总量（>0）
+Unit	char	6	no	no	单位
+M_E_id	char	10	yes	no	分配员编号（外键）
+P_State	char	1	no	no	任务状态（default 0未分配,1已分配）
+Limit_Date	Date	3	no	no	采购期限
+Project_id	char	5	no	no	项目号
+Start_Date	Date	3	yes	no	任务下达时间默认当天
+Task_tag	varchar	30	yes	no	说明
+5)	SupplierMaterial-供应商物资关系表
+字段名	数据类型	长度	允许空	主键	说明
+S_id	char	5	no	yes	供应商(外键)
+M_id	char	10	no	yes	物资编号(外键)
+6)	Contracts-合同信息表
+字段名	数据类型	长度	允许空	主键	说明
+C_id	char	10	no	yes	合同编号
+S_id	char	5	no	no	供应商
+P_E_id	char	10	no	no	采购员编号
+Signed_Date	Date	3	no	no	签订日期
+A_E_id	char	10	yes	no	审核员
+7)	ContractDetails-合同明细表
+字段名	数据类型	长度	允许空	主键	说明
+M_id	char	10	no	yes	物资编号
+C_id	char	10	no	yes	合同编号
+P_id	char	10	no	no	任务号
+Num	DECIMAL(10,2)	9	no	no	物资总量
+Unit_Price	DECIMAL(10,2)	9	no	no	单价（元）
+Sum_Money	DECIMAL(10,2)	9	no	no	总金额（元）
+Unit	char	6	no	no	单位
+Payment_Method	varchar	10	no	no	付款方式
+8)	Material-物资信息表
+字段名	数据类型	长度	允许空	主键	说明
+M_id	char	10	no	yes	物资编号
+M_name	varchar	20	no	no	物资名称
+Unit	char	6	no	no	度量单位
+M_Type	varchar	10	no	no	型号
+Describe	varchar	20	yes	no	描述
+Historical_Price	DECIMAL(10,2)	9	yes	no	历史价格
+9)	Inquiry-询价清单
+字段名	数据类型	长度	允许空	主键	说明
+I_id	char	10	no	yes	询价编号
+M_id	char	10	no	no	物资编号
+P_id	char	10	no	no	任务号
+B_E_id	char	10	no	no	采购员编号
+Max_Price	DECIMAL(10,2)	9	yes	no	最高报价
+Min_Price	DECIMAL(10,2)	9	yes	no	最低报价
+10)	InquiryDetails-询价明细表
+字段名	数据类型	长度	允许空	主键	说明
+I_id	char	10	no	yes	询价编号
+S_id	char	5	no	yes	供应商编号
+Unit_Price	DECIMAL(10,2)	9	no	no	单价
+Inquiry_Date	Date	3	no	no	询价日期
+R_E_id	char	10	yes	no	审价员编号
+Suggestion	varchar	20	yes	no	审价建议
+Review_Date	Date	3	yes	no	审价日期
+
+3	数据库应用系统开发
+3.1	表创建（表关系图）
+3.1.1	表关系图
+ 
+3.1.2	表的创建
+表名	代码
+Department	CREATE TABLE Department(
+	D_id CHAR(5) primary key,
+	D_name varchar(20) not null,
+	D_address varchar(30) not null,
+	Manager varchar(20) not null,
+	Manager_phone char(11) not null check(ISNUMERIC(Manager_phone)=1)
+)
+Employee	CREATE TABLE Employee(
+	E_id char(10) primary key,
+	E_name varchar(20) NOT NULL,
+	D_id char(5) FOREIGN KEY REFERENCES Department(D_id),
+	Gender char(1) check (Gender = '男' OR Gender='女' OR Gender = NULL),
+	E_phone char(11) check(ISNUMERIC(E_phone)=1),
+	Position varchar(10),
+	Age int,
+	UserName varchar(10) NOT NULL,
+	Password varchar(10) NOT NULL,
+	E_address varchar(30),
+	HouseholdRegister varchar(20),
+	Photo image,
+	DateOfBirth Date
+)
+Supplier	CREATE TABLE Supplier(
+	S_id char(5) PRIMARY KEY,
+	S_name	varchar(20) NOT NULL,
+	S_address	varchar(30) NOT NULL,
+	Describe	varchar(40),
+	TelephoneNumber	char(11) NOT NULL CHECK (ISNUMERIC (TelephoneNumber) =1),
+	Introduction	varchar(50),
+	CooperationNum	int default 0
+)
+Material	CREATE TABLE Material(
+	M_id	char(10) PRIMARY KEY,
+	M_name	varchar(20) NOT NULL,
+	Unit	char(6) NOT NULL,
+	M_Type	varchar(10) NOT NULL,
+	Describe	varchar(20),
+	Historical_Price	DECIMAL(10,2)
+)
+PurchaseTask	CREATE TABLE PurchaseTask(
+	P_id	char(10) NOT NULL,
+	M_id	char(10) NOT NULL,
+	B_E_id	char(10),
+	Num	DECIMAL(10,2) NOT NULL CHECK(Num>0),
+	Unit	char(6) NOT NULL,
+	M_E_id	char(10),
+	P_State	char(1) DEFAULT 0 CHECK(P_State='1' OR P_State=0),
+	Limit_Date	Date NOT NULL,
+	Project_id	char(5) NOT NULL,
+	Start_Date	Date DEFAULT getDate(),
+	Task_tag	varchar(30),
+	PRIMARY KEY(P_id,M_id),
+	FOREIGN KEY(M_id) REFERENCES  Material(M_id),
+	FOREIGN KEY(B_E_id) REFERENCES  Employee(E_id),
+	FOREIGN KEY(M_E_id) REFERENCES  Employee(E_id),
+)
+SupplierMaterial	CREATE TABLE SupplierMaterial(
+	S_id	char(5) NOT NULL,
+	M_id	char(10) NOT NULL,
+	PRIMARY KEY(S_id,M_id),
+	FOREIGN KEY(S_id) REFERENCES Supplier(S_id),
+	FOREIGN KEY(M_id) REFERENCES Material(M_id),
+)
+Contracts	CREATE TABLE Contracts(
+	C_id	char(10) PRIMARY KEY,
+	S_id	char(5) NOT NULL,
+	P_E_id	char(10) NOT NULL,
+	Signed_Date	Date NOT NULL,
+	A_E_id	char(10),
+	FOREIGN KEY(S_id) REFERENCES Supplier(S_id),
+	FOREIGN KEY(P_E_id) REFERENCES Employee(E_id),
+	FOREIGN KEY(A_E_id) REFERENCES Employee(E_id)
+)
+ContractDetails	CREATE TABLE ContractDetails(
+	M_id	char(10) NOT NULL,
+	C_id	char(10) NOT NULL,
+	P_id	char(10) NOT NULL,
+	Num		DECIMAL(10,2) NOT NULL CHECK(Num>0),
+	Unit_Price	DECIMAL(10,2) NOT NULL CHECK(Unit_Price>0),
+	Sum_Money	DECIMAL(10,2) NOT NULL CHECK(Sum_Money>0),
+	Unit	char(6) NOT NULL,
+	Payment_Method	varchar(10) NOT NULL,
+	PRIMARY KEY(M_id,C_id),
+	FOREIGN KEY(P_id,M_id) REFERENCES PurchaseTask(P_id,M_id),
+	FOREIGN KEY(C_id) REFERENCES Contracts(C_id),
+)
+Inquiry	CREATE TABLE Inquiry(
+	I_id	char(10) PRIMARY KEY,
+	M_id	char(10) NOT NULL,
+	P_id	char(10) NOT NULL,
+	B_E_id	char(10) NOT NULL,
+	Max_Price	DECIMAL(10,2) CHECK(Max_Price>0),
+	Min_Price	DECIMAL(10,2) CHECK(Min_Price>0),
+	FOREIGN KEY(P_id,M_id) REFERENCES PurchaseTask(P_id,M_id)
+)
+InquiryDetails	CREATE TABLE InquiryDetails(
+	I_id	char(10) NOT NULL,
+	S_id	char(5) NOT NULL,
+	Unit_Price	DECIMAL(10,2) NOT NULL CHECK(Unit_Price>0),
+	Inquiry_Date	Date NOT NULL,
+	R_E_id	char(10),
+	Suggestion	varchar(20),
+	Review_Date	Date,
+	PRIMARY KEY(I_id,S_id),
+	FOREIGN KEY(I_id) REFERENCES Inquiry(I_id),
+	FOREIGN KEY(S_id) REFERENCES Supplier(S_id),
+	FOREIGN KEY(R_E_id) REFERENCES Employee(E_id)
+)
+
+3.1	索引创建（可以截图）
+索引名	代码
+	
+3.1	视图创建
+视图名（作用）	代码
+	
+3.1	触发器创建
+触发器名（作用）	代码
+	
+
+ 
+4	功能模块设计
+功能名称	模块名称	说明
+采购任务下达	下达任务	
+	撤销任务	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+采购审价		
+		
+采购合同		
+采购发票		
+
+ 
+5	功能模块实现
+5.1.1	采购任务分配
+5.1.1	下达任务
+语句	CREATE PROCEDURE up_PushTask
+@strName VARCHAR(20)
+AS
+UPDATE ** SET **
+WHERE cgy=@strName
+执行结果	
+
+
+文件结尾

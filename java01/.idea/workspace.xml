@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="475609ed-bc54-4121-a7ba-9f1d37ee99b2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1Z1YQkH29HJdIjMQHrXaO6Hcf1M" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="experimental" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="475609ed-bc54-4121-a7ba-9f1d37ee99b2" name="Default Changelist" comment="" />
+      <created>1584008052619</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584008052619</updated>
+      <workItem from="1584008057463" duration="154000" />
+      <workItem from="1584094717570" duration="10000" />
+      <workItem from="1586321974574" duration="1448000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="261" y="0" key="#Notifications" timestamp="1586322006627">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="261" y="0" key="#Notifications/0.0.1536.834@0.0.1536.834" timestamp="1586322006627" />
+    <state x="261" y="0" key="#Project_Structure" timestamp="1584008066202">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="261" y="0" key="#Project_Structure/0.0.1536.834@0.0.1536.834" timestamp="1584008066202" />
+    <state x="223" y="66" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586326776663">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="223" y="66" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1586326776663" />
+    <state x="499" y="116" key="FileChooserDialogImpl" timestamp="1586326580863">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="499" y="116" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1586326580863" />
+    <state x="154" y="0" key="SettingsEditor" timestamp="1586326610326">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="154" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1586326610326" />
+    <state x="391" y="201" key="com.intellij.ide.util.TipDialog" timestamp="1584094722274">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="391" y="201" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1584094722274" />
+  </component>
+</project>
